@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبار الشامل لمادة الأحياء - الصف الحادي عشر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=El+Messiri:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-gold: #D4AF37;
+            --main-green: #0A5F38;
+            --main-blue: #1E3A8A;
+            --main-dark: #1A1A1A;
+            --biology-green: #2E8B57;
+            --cell-blue: #1E5799;
+            --enzyme-red: #8B0000;
+            --biochemistry-purple: #4B0082;
+            --progress-start: #0A5F38;
+            --progress-middle: #D4AF37;
+            --progress-end: #1E5799;
+            --transition: all 0.3s ease;
+            --correct-color: #2E8B57;
+            --incorrect-color: #8B0000;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: var(--main-dark);
+            color: #FFF;
+            font-family: 'Amiri', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            padding: 0;
+            background-image: 
+                linear-gradient(rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.95));
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 50px rgba(46, 139, 87, 0.5); }
+            50% { box-shadow: 0 0 60px rgba(46, 139, 87, 0.8); }
+            100% { box-shadow: 0 0 50px rgba(46, 139, 87, 0.5); }
+        }
+        
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(46, 139, 87, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(46, 139, 87, 0.9), 0 0 40px rgba(46, 139, 87, 0.6); }
+        }
+        
+        @keyframes lessonAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--biology-green);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--main-gold);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 2px solid var(--biology-green);
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(10, 95, 56, 0.3), rgba(30, 58, 138, 0.3));
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23000" width="100" height="100"/><path fill="%232E8B57" fill-opacity="0.05" d="M0 0h100v100H0z"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            z-index: -1;
+        }
+        
+        h1 {
+            color: var(--biology-green);
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(46, 139, 87, 0.7);
+            animation: glow 3s infinite alternate;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 15px;
+            font-family: 'El Messiri', sans-serif;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 30%;
+            right: 30%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--biology-green), transparent);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Reem Kufi', sans-serif;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 10000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--progress-start), var(--progress-middle), var(--progress-end));
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(10, 95, 56, 0.7);
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .exam-section {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.8));
+            border: 1px solid var(--biology-green);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exam-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><rect fill="%23000" width="100" height="100"/><path fill="%232E8B57" fill-opacity="0.03" d="M0 0h100v100H0z"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            z-index: -1;
+        }
+        
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            color: var(--biology-green);
+            border-bottom: 2px solid;
+            padding-bottom: 15px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            position: relative;
+            font-family: 'El Messiri', sans-serif;
+            text-shadow: 0 0 10px rgba(46, 139, 87, 0.5);
+        }
+        
+        .section-title::before {
+            content: "";
+            margin-left: 15px;
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--biology-green), transparent);
+            border-radius: 2px;
+        }
+        
+        .question-card {
+            background: linear-gradient(to right, rgba(30, 87, 153, 0.2), rgba(30, 87, 153, 0.1));
+            border: 1px solid var(--cell-blue);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .question-number {
+            background: var(--biology-green);
+            color: var(--main-dark);
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 20px;
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
+            z-index: 1;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin: 15px 0 25px 0;
+            padding-right: 10px;
+            line-height: 1.9;
+        }
+        
+        .options-container {
+            margin: 20px 0;
+            padding-right: 10px;
+        }
+        
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 139, 87, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        .option.selected {
+            background: rgba(46, 139, 87, 0.2);
+            border-color: var(--biology-green);
+        }
+        
+        .option.correct {
+            background: rgba(46, 139, 87, 0.3);
+            border-color: var(--correct-color);
+        }
+        
+        .option.incorrect {
+            background: rgba(139, 0, 0, 0.3);
+            border-color: var(--incorrect-color);
+        }
+        
+        .option-letter {
+            background: var(--biology-green);
+            color: var(--main-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .option-text {
+            font-size: 1.1rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(46, 139, 87, 0.2);
+        }
+        
+        .exam-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            border: 2px solid var(--biology-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(46, 139, 87, 0.3);
+        }
+        
+        .exam-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .exam-table th, .exam-table td {
+            padding: 14px 16px;
+            text-align: right;
+            border-bottom: 1px solid rgba(46, 139, 87, 0.3);
+        }
+        
+        .exam-table th {
+            background: rgba(46, 139, 87, 0.2);
+            color: var(--biology-green);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .exam-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 139, 87, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Amiri', serif;
+            margin: 10px 0;
+            transition: var(--transition);
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--biology-green);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.5);
+        }
+        
+        .answer-input.correct {
+            border-color: var(--correct-color);
+            background: rgba(46, 139, 87, 0.1);
+        }
+        
+        .answer-input.incorrect {
+            border-color: var(--incorrect-color);
+            background: rgba(139, 0, 0, 0.1);
+        }
+        
+        .essay-question {
+            background: linear-gradient(to right, rgba(75, 0, 130, 0.2), rgba(75, 0, 130, 0.1));
+            border: 1px solid var(--biochemistry-purple);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .essay-answer {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 139, 87, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            font-family: 'Amiri', serif;
+            margin: 15px 0;
+            resize: vertical;
+            transition: var(--transition);
+        }
+        
+        .essay-answer:focus {
+            outline: none;
+            border-color: var(--biology-green);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.5);
+        }
+        
+        .points-list {
+            margin: 15px 0;
+            padding-right: 25px;
+        }
+        
+        .points-list li {
+            margin: 10px 0;
+            padding-right: 10px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 35px 0 20px 0;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.4), rgba(30, 87, 153, 0.4));
+            color: white;
+            border: 1px solid var(--biology-green);
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-family: 'El Messiri', sans-serif;
+            font-size: 1.1rem;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.6), rgba(30, 87, 153, 0.6));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .nav-btn i {
+            margin: 0 8px;
+        }
+        
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, var(--biology-green), var(--cell-blue));
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-family: 'El Messiri', sans-serif;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .control-btn.secondary {
+            background: linear-gradient(135deg, var(--enzyme-red), var(--biochemistry-purple));
+        }
+        
+        .results-container {
+            background: linear-gradient(135deg, rgba(10, 95, 56, 0.3), rgba(30, 58, 138, 0.3));
+            border: 2px solid var(--biology-green);
+            border-radius: 15px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .results-title {
+            color: var(--biology-green);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-family: 'El Messiri', sans-serif;
+        }
+        
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--biology-green);
+            margin: 25px 0;
+            text-shadow: 0 0 15px rgba(46, 139, 87, 0.7);
+        }
+        
+        .score-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 35px 0;
+            gap: 15px;
+        }
+        
+        .score-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 10px;
+            flex: 1;
+            min-width: 220px;
+            border: 1px solid rgba(46, 139, 87, 0.2);
+        }
+        
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--biology-green);
+            margin: 10px 0;
+        }
+        
+        .score-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+        }
+        
+        .menu-toggle {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--biology-green);
+            border: 2px solid var(--biology-green);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10000;
+            font-size: 1.6rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .exam-menu {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid var(--biology-green);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 9999;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 300px;
+            transition: var(--transition);
+            display: none;
+        }
+        
+        .exam-menu h3 {
+            color: var(--biology-green);
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 2px solid var(--biology-green);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-family: 'El Messiri', sans-serif;
+        }
+        
+        .exam-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .exam-menu li {
+            margin: 10px 0;
+            border-bottom: 1px solid rgba(46, 139, 87, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        .exam-menu li:last-child {
+            border-bottom: none;
+        }
+        
+        .exam-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-family: 'Reem Kufi', sans-serif;
+        }
+        
+        .exam-menu a:hover {
+            background: rgba(46, 139, 87, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 45px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--biology-green);
+            color: var(--biology-green);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            color: var(--biology-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            line-height: 1.8;
+        }
+        
+        .biology-text {
+            color: #2E8B57;
+            text-shadow: 0 0 10px rgba(46, 139, 87, 0.7);
+            animation: glow 3s infinite alternate;
+        }
+        
+        .light-glow {
+            box-shadow: 0 0 15px rgba(46, 139, 87, 0.3), 0 0 30px rgba(46, 139, 87, 0.2);
+            transition: box-shadow 0.5s ease;
+        }
+        
+        .section-glow {
+            position: relative;
+        }
+        
+        .section-glow::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(46, 139, 87, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+        
+        .section-glow:hover::after {
+            opacity: 1;
+        }
+        
+        .section-appear {
+            animation: lessonAppear 1.5s ease-out forwards;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .exam-section { padding: 20px; }
+            .section-title { font-size: 1.7rem; }
+            header { padding: 40px 0; }
+            .control-buttons { flex-direction: column; }
+            .nav-btn { padding: 12px 20px; font-size: 1rem; }
+            .exam-menu { width: 280px; }
+            .question-card { padding: 20px; }
+            .option { padding: 12px; }
+            .score-item { min-width: 100%; }
+        }
+        
+        .hint-box {
+            background: linear-gradient(to right, rgba(75, 0, 130, 0.2), rgba(75, 0, 130, 0.1));
+            border: 1px solid var(--biochemistry-purple);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 18px 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hint-title {
+            color: var(--biochemistry-purple);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .model-answer {
+            background: linear-gradient(to right, rgba(30, 87, 153, 0.2), rgba(30, 87, 153, 0.1));
+            border: 1px solid var(--cell-blue);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 18px 0;
+            display: none;
+        }
+        
+        .model-answer-title {
+            color: var(--cell-blue);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .toggle-answer-btn {
+            background: rgba(46, 139, 87, 0.2);
+            color: var(--biology-green);
+            border: 1px solid var(--biology-green);
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 12px;
+            transition: var(--transition);
+            font-family: 'El Messiri', sans-serif;
+        }
+        
+        .toggle-answer-btn:hover {
+            background: rgba(46, 139, 87, 0.4);
+        }
+        
+        .question-part {
+            margin: 20px 0;
+            padding-right: 15px;
+        }
+        
+        .question-part-title {
+            color: var(--biology-green);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-family: 'El Messiri', sans-serif;
+            border-right: 3px solid var(--biology-green);
+            padding-right: 10px;
+        }
+        
+        .inline-input {
+            display: inline-block;
+            width: auto;
+            min-width: 100px;
+            margin: 0 8px;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        
+        .comparison-row {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .comparison-label {
+            font-weight: bold;
+            color: var(--biology-green);
+            min-width: 150px;
+            margin-left: 20px;
+        }
+        
+        .unit-badge {
+            display: inline-block;
+            background: rgba(139, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            border: 1px solid rgba(139, 0, 0, 0.5);
+        }
+        
+        .cell-badge {
+            background: rgba(30, 87, 153, 0.3);
+            color: #6ab0ff;
+            border: 1px solid rgba(30, 87, 153, 0.5);
+        }
+        
+        .biochemistry-badge {
+            background: rgba(75, 0, 130, 0.3);
+            color: #b388ff;
+            border: 1px solid rgba(75, 0, 130, 0.5);
+        }
+        
+        .division-badge {
+            background: rgba(10, 95, 56, 0.3);
+            color: #2E8B57;
+            border: 1px solid rgba(10, 95, 56, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="starsContainer"></div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="menu-toggle light-glow" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <div class="exam-menu light-glow" id="examMenu">
+        <h3 class="biology-text">قائمة أسئلة الاختبار</h3>
+        <ul>
+            <li><a href="#instructions"><i class="fas fa-info-circle"></i> تعليمات الاختبار</a></li>
+            <li><a href="#unit1"><i class="fas fa-microscope"></i> الوحدة الأولى: علم الخلية</a></li>
+            <li><a href="#unit2"><i class="fas fa-atom"></i> الوحدة الثانية: الكيمياء الحيوية</a></li>
+            <li><a href="#unit3"><i class="fas fa-vial"></i> الوحدة الثالثة: الإنزيمات</a></li>
+            <li><a href="#unit4"><i class="fas fa-divide"></i> الوحدة الرابعة: دورة الخلية</a></li>
+            <li><a href="#essay"><i class="fas fa-pen-nib"></i> الأسئلة المقالية</a></li>
+            <li><a href="#results"><i class="fas fa-chart-bar"></i> عرض النتائج</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <header class="floating">
+            <h1 class="biology-text">الاختبار الشامل لمادة الأحياء <i class="fas fa-dna"></i></h1>
+            <p>الصف: الحادي عشر - جميع الوحدات - الفصل الدراسي الأول</p>
+            <p>المادة: الأحياء - اختبار شامل على الوحدات الأربعة</p>
+            <p style="margin-top: 20px; font-size: 1.1rem; color: var(--biology-green);">أجب عن جميع الأسئلة الآتية (50 سؤالاً)</p>
+        </header>
+
+        <!-- تعليمات الاختبار -->
+        <div class="exam-section section-glow light-glow" id="instructions">
+            <h2 class="section-title biology-text">تعليمات الاختبار <i class="fas fa-info-circle"></i></h2>
+            
+            <div class="question-card">
+                <div class="question-text">
+                    <p>أهلاً بك في الاختبار الشامل لمادة الأحياء للصف الحادي عشر. يغطي هذا الاختبار جميع وحدات المنهج:</p>
+                    <ul class="points-list">
+                        <li><strong>الوحدة الأولى:</strong> علم الخلية والمجهر <span class="unit-badge cell-badge">20 سؤالاً</span></li>
+                        <li><strong>الوحدة الثانية:</strong> الكيمياء الحيوية <span class="unit-badge biochemistry-badge">15 سؤالاً</span></li>
+                        <li><strong>الوحدة الثالثة:</strong> الإنزيمات <span class="unit-badge">10 أسئلة</span></li>
+                        <li><strong>الوحدة الرابعة:</strong> دورة الخلية والانقسام المتساوي <span class="unit-badge division-badge">15 سؤالاً</span></li>
+                        <li>يمكنك التنقل بين الأقسام باستخدام قائمة التنقل على اليمين (زر ☰).</li>
+                        <li>سيتم حفظ إجاباتك تلقائياً حتى لا تفقدها.</li>
+                        <li>بعد الانتهاء، اضغط على زر "تصحيح الإجابات" للحصول على نتيجتك.</li>
+                        <li>للأسئلة المقالية، يمكنك عرض نموذج الإجابة بالضغط على الزر المخصص لذلك.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="control-buttons">
+                <button class="control-btn" onclick="startExam()">
+                    <i class="fas fa-play"></i> بدء الاختبار
+                </button>
+            </div>
+        </div>
+
+        <!-- الوحدة الأولى: علم الخلية -->
+        <div class="exam-section section-glow light-glow" id="unit1">
+            <h2 class="section-title biology-text">الوحدة الأولى: علم الخلية والمجهر <i class="fas fa-microscope"></i></h2>
+            <p class="question-text">اختر الإجابة الصحيحة لكل مما يلي:</p>
+            
+            <!-- السؤال 1 -->
+            <div class="question-card">
+                <div class="question-number">1</div>
+                <div class="question-text">أول من اكتشف الخلية باستخدام المجهر عام 1665م هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q1')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">روبرت هوك</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q1')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">لويس باستير</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q1')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">أنطون فان ليفينهوك</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q1')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">شارلز داروين</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 2 -->
+            <div class="question-card">
+                <div class="question-number">2</div>
+                <div class="question-text">الفرق الرئيسي بين الخلية بدائية النواة وحقيقية النواة هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q2')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">وجود غشاء بلازمي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">وجود المادة الوراثية (DNA)</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">وجود نواة محاطة بغشاء</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">وجود ريبوسومات</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 3 -->
+            <div class="question-card">
+                <div class="question-number">3</div>
+                <div class="question-text">أي مما يلي يوجد في الخلية النباتية ولا يوجد في الخلية الحيوانية؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q3')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الميتوكوندريا</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الجدار الخلوي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">النواة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الغشاء البلازمي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 4 -->
+            <div class="question-card">
+                <div class="question-number">4</div>
+                <div class="question-text">العضية المسؤولة عن إنتاج الطاقة في الخلية تسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q4')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">البلاستيدة الخضراء</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">جهاز جولجي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الشبكة الإندوبلازمية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الميتوكوندريا</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 5 -->
+            <div class="question-card">
+                <div class="question-number">5</div>
+                <div class="question-text">أي من العبارات التالية صحيحة بالنسبة للفيروسات؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q5')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">تتكون من خلية واحدة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">تتكاثر خارج الخلايا الحية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">تتكون من DNA أو RNA وغلاف بروتيني</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">لها أنشطة أيضية مستقلة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 6 -->
+            <div class="question-card">
+                <div class="question-number">6</div>
+                <div class="question-text">الوحدة المستخدمة لقياس حجم الخلية هي:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q6')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">السنتيمتر</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">المليمتر</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الميكرومتر</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الكيلومتر</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 7 -->
+            <div class="question-card">
+                <div class="question-number">7</div>
+                <div class="question-text">أي من العضيات التالية تحتوي على إنزيمات هاضمة؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q7')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الليسوسومات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q7')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الريبوسومات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q7')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">جهاز جولجي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q7')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الشبكة الإندوبلازمية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 8 -->
+            <div class="question-card">
+                <div class="question-number">8</div>
+                <div class="question-text">المجهر الذي يمكنه تكبير الأشياء حتى مليون مرة هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q8')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">المجهر الضوئي المركب</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q8')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">المجهر التشريحي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q8')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">المجهر الإلكتروني</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q8')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">المجهر البسيط</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 9 -->
+            <div class="question-card">
+                <div class="question-number">9</div>
+                <div class="question-text">أي من الكائنات التالية يتكون من خلايا بدائية النواة؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q9')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الإنسان</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q9')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">البكتيريا</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q9')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">النبات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q9')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الفطريات</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 10 -->
+            <div class="question-card">
+                <div class="question-number">10</div>
+                <div class="question-text">أي من العبارات التالية تمثل جزءاً من النظرية الخلوية؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q10')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">جميع الخلايا تحتوي على نواة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q10')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">جميع الكائنات الحية تتكون من خلية واحدة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q10')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الخلية هي الوحدة الأساسية للتركيب والوظيفة في الكائنات الحية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q10')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الخلايا لا تنشأ إلا من خلايا غير حية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" onclick="scrollToSection('instructions')"><i class="fas fa-arrow-right"></i> السابق: التعليمات</button>
+                <button class="nav-btn" onclick="scrollToSection('unit2')">التالي: الوحدة الثانية <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- الوحدة الثانية: الكيمياء الحيوية -->
+        <div class="exam-section section-glow light-glow" id="unit2">
+            <h2 class="section-title biology-text">الوحدة الثانية: الكيمياء الحيوية <i class="fas fa-atom"></i></h2>
+            
+            <!-- السؤال 11 -->
+            <div class="question-card">
+                <div class="question-number">11</div>
+                <div class="question-text">الجلوكوز هو مثال على:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q11')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">سكر أحادي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q11')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">سكر ثنائي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q11')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">عديد التسكر</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q11')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">دهون</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 12 -->
+            <div class="question-card">
+                <div class="question-number">12</div>
+                <div class="question-text">السليولوز هو عديد التسكر الموجود في:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q12')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">جدران الخلايا الحيوانية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q12')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">جدران الخلايا النباتية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q12')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">غشاء الخلية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q12')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">النواة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 13 -->
+            <div class="question-card">
+                <div class="question-number">13</div>
+                <div class="question-text">البروتينات تتكون من وحدات بناء تسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q13')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الأحماض الدهنية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q13')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الأحماض الأمينية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q13')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">النيوكليوتيدات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q13')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">السكريات الأحادية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 14 -->
+            <div class="question-card">
+                <div class="question-number">14</div>
+                <div class="question-text">الدهون المشبعة توجد عادة في:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q14')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">زيت الزيتون</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q14')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">زيت الذرة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q14')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الزبدة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q14')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الأسماك</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 15 -->
+            <div class="question-card">
+                <div class="question-number">15</div>
+                <div class="question-text">أي مما يلي ليس من وظائف الماء في الكائنات الحية؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q15')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">مذيب للعديد من المواد</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q15')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">ينظم درجة حرارة الجسم</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q15')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">يخزن المعلومات الوراثية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q15')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">وسط لحدوث التفاعلات الكيميائية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 16 -->
+            <div class="question-card">
+                <div class="question-number">16</div>
+                <div class="question-text">الهيموجلوبين هو مثال على:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q16')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الكربوهيدرات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q16')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">البروتينات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q16')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الدهون</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q16')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الأحماض النووية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 17 -->
+            <div class="question-card">
+                <div class="question-number">17</div>
+                <div class="question-text">عدد الأحماض الأمينية الأساسية في البروتينات هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q17')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">10</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q17')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">20</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q17')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">30</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q17')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">40</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 18 -->
+            <div class="question-card">
+                <div class="question-number">18</div>
+                <div class="question-text">الجزيء الذي يخزن الطاقة في الخلية هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q18')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الجلوكوز</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q18')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">ATP</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q18')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">DNA</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q18')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الهيموجلوبين</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 19 -->
+            <div class="question-card">
+                <div class="question-number">19</div>
+                <div class="question-text">التركيب الثالثي للبروتين يشير إلى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q19')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">تسلسل الأحماض الأمينية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q19')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الترتيب المكاني ثلاثي الأبعاد</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q19')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">ارتباط عدة سلاسل ببتيدية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q19')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">التكرار المنتظم في السلسلة الببتيدية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 20 -->
+            <div class="question-card">
+                <div class="question-number">20</div>
+                <div class="question-text">البوليمر هو جزيء كبير يتكون من وحدات صغيرة مكررة تسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q20')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">مونومرات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q20')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">بوليميرات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q20')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">محفزات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q20')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">إنزيمات</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" onclick="scrollToSection('unit1')"><i class="fas fa-arrow-right"></i> السابق: الوحدة الأولى</button>
+                <button class="nav-btn" onclick="scrollToSection('unit3')">التالي: الوحدة الثالثة <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- الوحدة الثالثة: الإنزيمات -->
+        <div class="exam-section section-glow light-glow" id="unit3">
+            <h2 class="section-title biology-text">الوحدة الثالثة: الإنزيمات <i class="fas fa-vial"></i></h2>
+            
+            <!-- السؤال 21 -->
+            <div class="question-card">
+                <div class="question-number">21</div>
+                <div class="question-text">الإنزيمات في معظمها عبارة عن:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q21')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">كربوهيدرات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q21')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">بروتينات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q21')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">دهون</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q21')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">أحماض نووية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 22 -->
+            <div class="question-card">
+                <div class="question-number">22</div>
+                <div class="question-text">الإنزيم يعمل على:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q22')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">زيادة طاقة التنشيط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q22')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">خفض طاقة التنشيط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q22')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">منع حدوث التفاعل</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q22')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">تغيير اتجاه التفاعل</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 23 -->
+            <div class="question-card">
+                <div class="question-number">23</div>
+                <div class="question-text">نظرية "القفل والمفتاح" في عمل الإنزيمات تنص على أن:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q23')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الإنزيم يتغير شكله عند ارتباطه بالركيزة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q23')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الموقع النشط للإنزيم يتناسب تماماً مع الركيزة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q23')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الإنزيم يعمل فقط عند درجة حرارة محددة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q23')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الإنزيم يدمر بعد انتهاء التفاعل</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 24 -->
+            <div class="question-card">
+                <div class="question-number">24</div>
+                <div class="question-text">عند زيادة درجة الحرارة عن الدرجة المثلى للإنزيم، فإنه:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q24')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">يزيد نشاطه</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q24')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">يتلف ويصبح غير فعال</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q24')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">يغير نوع الركيزة التي يعمل عليها</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q24')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">ينتج كمية أكبر من الناتج</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 25 -->
+            <div class="question-card">
+                <div class="question-number">25</div>
+                <div class="question-text">الإنزيم الذي يكسر النشا إلى سكريات بسيطة في الفم يسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q25')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الليباز</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q25')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">البروتياز</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q25')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الأميليز</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q25')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الكاتالاز</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 26 -->
+            <div class="question-card">
+                <div class="question-number">26</div>
+                <div class="question-text">في التثبيط التنافسي، يرتبط المثبط:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q26')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">بالموقع النشط للإنزيم</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q26')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">بموقع آخر غير الموقع النشط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q26')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">بالركيزة فقط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q26')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">بالناتج النهائي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 27 -->
+            <div class="question-card">
+                <div class="question-number">27</div>
+                <div class="question-text">أي من العوامل التالية لا يؤثر على نشاط الإنزيم؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q27')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">درجة الحرارة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q27')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الأس الهيدروجيني (pH)</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q27')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">تركيز الإنزيم</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q27')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">حجم الإنزيم</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 28 -->
+            <div class="question-card">
+                <div class="question-number">28</div>
+                <div class="question-text">الإنزيم المثبت هو إنزيم:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q28')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">تم إعدامه</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q28')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">تم تثبيته على دعامة صلبة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q28')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">فقد نشاطه</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q28')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">يعمل بشكل عكسي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 29 -->
+            <div class="question-card">
+                <div class="question-number">29</div>
+                <div class="question-text">تستخدم الإنزيمات في المنظفات لإزالة:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q29')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">البقع العضوية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q29')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الأوساخ المعدنية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q29')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">البقع الزيتية فقط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q29')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">البقع الناتجة عن الصدأ</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 30 -->
+            <div class="question-card">
+                <div class="question-number">30</div>
+                <div class="question-text">عند وصول الإنزيم إلى أقصى سرعة له (Vmax)، فإن:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q30')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">جميع المواقع النشطة مشبعة بالركيزة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q30')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">يزيد تركيز الإنزيم</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q30')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">يقل تركيز الركيزة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q30')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">يبدأ الإنزيم بالتلف</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" onclick="scrollToSection('unit2')"><i class="fas fa-arrow-right"></i> السابق: الوحدة الثانية</button>
+                <button class="nav-btn" onclick="scrollToSection('unit4')">التالي: الوحدة الرابعة <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- الوحدة الرابعة: دورة الخلية -->
+        <div class="exam-section section-glow light-glow" id="unit4">
+            <h2 class="section-title biology-text">الوحدة الرابعة: دورة الخلية والانقسام المتساوي <i class="fas fa-divide"></i></h2>
+            
+            <!-- السؤال 31 -->
+            <div class="question-card">
+                <div class="question-number">31</div>
+                <div class="question-text">عدد الكروموسومات في الخلية البشرية (الجسدية) هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q31')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">23</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q31')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">46</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q31')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">64</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q31')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">92</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 32 -->
+            <div class="question-card">
+                <div class="question-number">32</div>
+                <div class="question-text">المرحلة التي تتضاعف فيها المادة الوراثية (DNA) في دورة الخلية هي:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q32')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الطور G1</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q32')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الطور S</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q32')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الطور G2</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q32')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الطور التمهيدي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 33 -->
+            <div class="question-card">
+                <div class="question-number">33</div>
+                <div class="question-text">في أي طور من أطوار الانقسام المتساوي تصطف الكروموسومات في منتصف الخلية؟</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q33')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الطور التمهيدي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q33')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الطور الاستوائي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q33')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الطور الانفصالي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q33')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الطور النهائي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 34 -->
+            <div class="question-card">
+                <div class="question-number">34</div>
+                <div class="question-text">انقسام السيتوبلازم في الخلايا النباتية يتم عن طريق تكوين:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q34')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الصفيحة الخلوية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q34')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الأهداب</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q34')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الأقدام الكاذبة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q34')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الانشطار الثنائي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 35 -->
+            <div class="question-card">
+                <div class="question-number">35</div>
+                <div class="question-text">الخلايا التي تتوقف عن الانقسام وتتخصص في وظيفة معينة تسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q35')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الخلايا الجذعية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q35')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الخلايا السرطانية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q35')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الخلايا المتخصصة</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q35')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الخلايا الجنسية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 36 -->
+            <div class="question-card">
+                <div class="question-number">36</div>
+                <div class="question-text">المرض الذي ينتج عن انقسام غير منضبط للخلايا هو:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q36')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">السكري</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q36')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">السرطان</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q36')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الأنيميا</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q36')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الربو</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 37 -->
+            <div class="question-card">
+                <div class="question-number">37</div>
+                <div class="question-text">الخلايا التي يمكنها التحول إلى أنواع مختلفة من الخلايا المتخصصة تسمى:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q37')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">الخلايا العصبية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q37')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">الخلايا العضلية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q37')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الخلايا الجذعية</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q37')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">الخلايا الطلائية</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 38 -->
+            <div class="question-card">
+                <div class="question-number">38</div>
+                <div class="question-text">التيلوميرات هي أجزاء توجد في:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q38')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">نهايات الكروموسومات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q38')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">منتصف الكروموسومات</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q38')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">الغشاء البلازمي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q38')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">النواة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 39 -->
+            <div class="question-card">
+                <div class="question-number">39</div>
+                <div class="question-text">أهمية الانقسام المتساوي تشمل جميع ما يلي عدا:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q39')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">نمو الكائنات متعددة الخلايا</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q39')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">التكاثر الجنسي</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q39')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">التئام الجروح</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q39')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">استبدال الخلايا التالفة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- السؤال 40 -->
+            <div class="question-card">
+                <div class="question-number">40</div>
+                <div class="question-text">الخلايا الجذعية الموجودة في نخاع العظم تنتج:</div>
+                <div class="options-container">
+                    <div class="option" onclick="selectOption(this, 'q40')">
+                        <div class="option-letter">أ</div>
+                        <div class="option-text">خلايا الدم فقط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q40')">
+                        <div class="option-letter">ب</div>
+                        <div class="option-text">خلايا الجلد فقط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q40')">
+                        <div class="option-letter">ج</div>
+                        <div class="option-text">خلايا العظام فقط</div>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q40')">
+                        <div class="option-letter">د</div>
+                        <div class="option-text">خلايا الأعصاب فقط</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" onclick="scrollToSection('unit3')"><i class="fas fa-arrow-right"></i> السابق: الوحدة الثالثة</button>
+                <button class="nav-btn" onclick="scrollToSection('essay')">التالي: الأسئلة المقالية <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- الأسئلة المقالية -->
+        <div class="exam-section section-glow light-glow" id="essay">
+            <h2 class="section-title biology-text">الأسئلة المقالية والتحليلية <i class="fas fa-pen-nib"></i></h2>
+            
+            <!-- السؤال 41 -->
+            <div class="question-card">
+                <div class="question-number">41</div>
+                <div class="question-text">ما هو دور كل من العضيات التالية في الخلية؟</div>
+                
+                <table class="exam-table">
+                    <thead>
+                        <tr>
+                            <th width="30%">العضية</th>
+                            <th width="70%">الدور/الوظيفة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الميتوكوندريا</td>
+                            <td><textarea class="essay-answer" id="q41a" placeholder="اكتب دور الميتوكوندريا هنا..." style="min-height: 60px;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>البلاستيدات الخضراء</td>
+                            <td><textarea class="essay-answer" id="q41b" placeholder="اكتب دور البلاستيدات الخضراء هنا..." style="min-height: 60px;"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>جهاز جولجي</td>
+                            <td><textarea class="essay-answer" id="q41c" placeholder="اكتب دور جهاز جولجي هنا..." style="min-height: 60px;"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer1')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer1">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p><strong>الميتوكوندريا:</strong> محطات توليد الطاقة في الخلية، تحدث فيها عملية التنفس الخلوي.</p>
+                    <p><strong>البلاستيدات الخضراء:</strong> تحدث فيها عملية البناء الضوئي في الخلايا النباتية.</p>
+                    <p><strong>جهاز جولجي:</strong> يعمل على تعديل وتعبئة وتوزيع المواد في الخلية.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 42 -->
+            <div class="question-card">
+                <div class="question-number">42</div>
+                <div class="question-text">قارن بين الخلية النباتية والخلية الحيوانية من حيث ثلاث اختلافات.</div>
+                <textarea class="essay-answer" id="q42" placeholder="اكتب مقارنتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer2')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer2">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>1. الخلية النباتية تحتوي على جدار خلوي (من السليلوز) بينما الخلية الحيوانية لا تحتوي على جدار خلوي.</p>
+                    <p>2. الخلية النباتية تحتوي على بلاستيدات خضراء (لعملية البناء الضوئي) بينما الخلية الحيوانية لا تحتوي عليها.</p>
+                    <p>3. الخلية النباتية تحتوي على فجوة مركزية كبيرة بينما الخلية الحيوانية تحتوي على فجوات صغيرة مؤقتة.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 43 -->
+            <div class="question-card">
+                <div class="question-number">43</div>
+                <div class="question-text">اشرح كيف تعمل الإنزيمات باستخدام نظرية "التلاؤم المستحث".</div>
+                <textarea class="essay-answer" id="q43" placeholder="اكتب شرحك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer3')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer3">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>نظرية التلاؤم المستحث تقترح أن الإنزيم ليس صلباً تماماً، بل هو مرن ويتغير شكله قليلاً عند ارتباطه بالركيزة. عندما تقترب الركيزة من الإنزيم، يتغير شكل الموقع النشط قليلاً ليتلاءم بشكل أفضل مع الركيزة، مما يزيد من كفاءة التفاعل. بعد انتهاء التفاعل، يعود الإنزيم إلى شكله الأصلي.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 44 -->
+            <div class="question-card">
+                <div class="question-number">44</div>
+                <div class="question-text">اذكر ثلاث وظائف للدهون في الجسم.</div>
+                <textarea class="essay-answer" id="q44" placeholder="اكتب الوظائف هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer4')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer4">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>1. تخزين الطاقة (الدهون الثلاثية).</p>
+                    <p>2. تكوين أغشية الخلايا (الدهون الفوسفورية).</p>
+                    <p>3. العزل الحراري وحماية الأعضاء (الدهون تحت الجلد وحول الأعضاء).</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 45 -->
+            <div class="question-card">
+                <div class="question-number">45</div>
+                <div class="question-text">ما هي مراحل الانقسام المتساوي بالترتيب؟ اشرح باختصار ما يحدث في كل مرحلة.</div>
+                <textarea class="essay-answer" id="q45" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer5')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer5">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>1. الطور التمهيدي: تتكثف الكروموسومات وتصبح مرئية، يختفي الغلاف النووي.</p>
+                    <p>2. الطور الاستوائي: تصطف الكروموسومات في منتصف الخلية.</p>
+                    <p>3. الطور الانفصالي: تنفصل الكروماتيدات الشقيقة وتتحرك نحو أقطاب الخلية.</p>
+                    <p>4. الطور النهائي: تتكون الأغلفة النووية من جديد حول الكروموسومات.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 46 -->
+            <div class="question-card">
+                <div class="question-number">46</div>
+                <div class="question-text">ما هي الخلايا الجذعية؟ وما أهميتها في الجسم؟</div>
+                <textarea class="essay-answer" id="q46" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer6')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer6">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>الخلايا الجذعية هي خلايا غير متخصصة يمكنها الانقسام إلى أجل غير مسمى، ولديها القدرة على التحول إلى أنواع مختلفة من الخلايا المتخصصة. أهميتها تشمل: النمو، إصلاح الأنسجة التالفة، تعويض الخلايا الميتة (مثل خلايا الدم والجلد)، وتستخدم في العلاج بالخلايا الجذعية لأمراض مثل اللوكيميا.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 47 -->
+            <div class="question-card">
+                <div class="question-number">47</div>
+                <div class="question-text">لماذا تعتبر التيلوميرات مهمة للكروموسومات؟ وماذا يحدث عندما تقصر التيلوميرات؟</div>
+                <textarea class="essay-answer" id="q47" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer7')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer7">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>التيلوميرات مهمة لأنها تحمي نهايات الكروموسومات من التلف وفقدان المعلومات الوراثية أثناء انقسام الخلية. مع كل انقسام خلوي، تقصر التيلوميرات قليلاً. عندما تصبح قصيرة جداً، تتوقف الخلية عن الانقسام وقد تموت، مما يساهم في شيخوخة الخلايا.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 48 -->
+            <div class="question-card">
+                <div class="question-number">48</div>
+                <div class="question-text">اذكر ثلاث مواد مسرطنة مع مثال على كل منها.</div>
+                <textarea class="essay-answer" id="q48" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer8')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer8">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>1. التدخين: يحتوي على عشرات المواد المسرطنة ويسبب سرطان الرئة.</p>
+                    <p>2. الأشعة فوق البنفسجية: تسبب طفرات في خلايا الجلد تؤدي إلى سرطان الجلد.</p>
+                    <p>3. بعض الفيروسات: مثل فيروس الورم الحليمي البشري (HPV) الذي يسبب سرطان عنق الرحم.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 49 -->
+            <div class="question-card">
+                <div class="question-number">49</div>
+                <div class="question-text">ما الفرق بين الأورام الحميدة والأورام الخبيثة؟</div>
+                <textarea class="essay-answer" id="q49" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer9')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer9">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p><strong>الأورام الحميدة:</strong> تنمو ببطء، حدودها واضحة، لا تنتشر إلى أجزاء أخرى من الجسم، يمكن إزالتها جراحياً ولا تعود.</p>
+                    <p><strong>الأورام الخبيثة (السرطانية):</strong> تنمو بسرعة، حدودها غير واضحة، تنتشر إلى أجزاء أخرى من الجسم (نقيلة)، يصعب استئصالها تماماً.</p>
+                </div>
+            </div>
+            
+            <!-- السؤال 50 -->
+            <div class="question-card">
+                <div class="question-number">50</div>
+                <div class="question-text">اشرح لماذا يعد الماء مهماً للحياة، مع ذكر ثلاث خصائص للماء تدعم ذلك.</div>
+                <textarea class="essay-answer" id="q50" placeholder="اكتب إجابتك هنا..."></textarea>
+                <button class="toggle-answer-btn" onclick="toggleModelAnswer('modelAnswer10')">عرض نموذج الإجابة</button>
+                <div class="model-answer" id="modelAnswer10">
+                    <div class="model-answer-title">نموذج الإجابة:</div>
+                    <p>الماء مهم للحياة لأنه مذيب ممتاز لمعظم المواد الكيميائية الحيوية، وله سعة حرارية عالية (يمتص الحرارة دون أن ترتفع درجة حرارته كثيراً)، وله حرارة تبخر عالية (يبرد الأجسام عند تبخره). خصائص الماء التي تدعم ذلك: قطبيته، تكوين الروابط الهيدروجينية، كثافته العالية، وتوسعه عند التجمد.</p>
+                </div>
+            </div>
+            
+            <div class="control-buttons">
+                <button class="control-btn secondary" onclick="showResults()">
+                    <i class="fas fa-chart-bar"></i> تصحيح الإجابات وعرض النتيجة
+                </button>
+            </div>
+            
+            <div class="navigation">
+                <button class="nav-btn" onclick="scrollToSection('unit4')"><i class="fas fa-arrow-right"></i> السابق: الوحدة الرابعة</button>
+                <button class="nav-btn" onclick="scrollToSection('results')">عرض النتائج <i class="fas fa-arrow-left"></i></button>
+            </div>
+        </div>
+
+        <!-- عرض النتائج -->
+        <div class="results-container" id="results">
+            <h2 class="results-title biology-text">نتيجة الاختبار الشامل للأحياء <i class="fas fa-award"></i></h2>
+            
+            <div class="score-display" id="totalScore">0%</div>
+            
+            <div class="score-details">
+                <div class="score-item">
+                    <div class="score-label">الإجابات الصحيحة</div>
+                    <div class="score-value" id="correctCount">0</div>
+                </div>
+                
+                <div class="score-item">
+                    <div class="score-label">الإجابات الخاطئة</div>
+                    <div class="score-value" id="incorrectCount">0</div>
+                </div>
+                
+                <div class="score-item">
+                    <div class="score-label">الدرجة الكلية</div>
+                    <div class="score-value" id="totalPoints">0</div>
+                    <div class="score-label">من 100 درجة</div>
+                </div>
+            </div>
+            
+            <div style="margin: 30px 0; text-align: right;">
+                <h3 style="color: var(--biology-green); margin-bottom: 15px;">تحليل أدائك حسب الوحدات:</h3>
+                <div id="performanceNotes" style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; text-align: right;">
+                    <!-- سيتم ملء هذا القسم بالملاحظات تلقائياً -->
+                </div>
+            </div>
+            
+            <div class="control-buttons">
+                <button class="control-btn" onclick="resetExam()">
+                    <i class="fas fa-redo"></i> إعادة محاولة
+                </button>
+                <button class="control-btn secondary" onclick="scrollToSection('instructions')">
+                    <i class="fas fa-home"></i> العودة للبداية
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="copyright">
+                <p class="biology-text">الاختبار الشامل لمادة الأحياء - الصف الحادي عشر - جميع الوحدات</p>
+                <p>تم إنشاء هذا الاختبار التفاعلي بناءً على محتوى وحدات الأحياء الأربعة للصف الحادي عشر</p>
+                <p>جميع الأسئلة مستوحاة من المنهج الدراسي مع إضافة أمثلة واقعية</p>
+                <p style="margin-top: 15px;">تصميم وتطوير: جاسر </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    // إنشاء النجوم في الخلفية
+    function createStars() {
+        const starsContainer = document.getElementById('starsContainer');
+        const starCount = 150;
+        
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            const size = Math.random() * 2;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // شريط التقدم
+    window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        
+        var progressBar = document.getElementById("progressBar");
+        progressBar.style.width = scrolled + "%";
+        
+        if (scrolled < 25) {
+            progressBar.style.background = "linear-gradient(90deg, var(--progress-start), var(--progress-middle))";
+        } else if (scrolled < 50) {
+            progressBar.style.background = "linear-gradient(90deg, var(--progress-middle), var(--progress-end))";
+        } else if (scrolled < 75) {
+            progressBar.style.background = "linear-gradient(90deg, var(--progress-end), var(--progress-start))";
+        } else {
+            progressBar.style.background = "linear-gradient(90deg, var(--progress-start), var(--progress-end))";
+        }
+    };
+    
+    // التنقل بين الأقسام
+    function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+    
+    // إظهار/إخفاء قائمة الأسئلة
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        const menu = document.getElementById('examMenu');
+        if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    });
+    
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('examMenu');
+        const toggle = document.getElementById('menuToggle');
+        
+        if (!menu.contains(event.target) && !toggle.contains(event.target) && menu.style.display === 'block') {
+            menu.style.display = 'none';
+        }
+    });
+
+    // بدء الاختبار
+    function startExam() {
+        scrollToSection('unit1');
+    }
+     
+    // تحديد خيار في أسئلة الاختيار من متعدد
+    function selectOption(element, questionId) {
+        // إيجاد البطاقة الأصلية للسؤال
+        const questionCard = element.closest('.question-card');
+        if (!questionCard) return;
+        
+        // إزالة التحديد من جميع الخيارات في نفس السؤال
+        const optionsContainer = questionCard.querySelector('.options-container');
+        const options = optionsContainer.querySelectorAll('.option');
+        
+        options.forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        // إضافة التحديد للخيار المختار
+        element.classList.add('selected');
+        
+        // الحصول على نص الإجابة المختارة
+        const selectedText = element.querySelector('.option-text').textContent.trim();
+        
+        // حفظ الإجابة في localStorage
+        localStorage.setItem(questionId, selectedText);
+    }
+
+    // الإجابات الصحيحة للأسئلة الموضوعية (1-40)
+    const correctAnswers = {
+        // الوحدة الأولى: علم الخلية (1-10)
+        q1: "روبرت هوك",
+        q2: "وجود نواة محاطة بغشاء",
+        q3: "الجدار الخلوي",
+        q4: "الميتوكوندريا",
+        q5: "تتكون من DNA أو RNA وغلاف بروتيني",
+        q6: "الميكرومتر",
+        q7: "الليسوسومات",
+        q8: "المجهر الإلكتروني",
+        q9: "البكتيريا",
+        q10: "الخلية هي الوحدة الأساسية للتركيب والوظيفة في الكائنات الحية",
+        
+        // الوحدة الثانية: الكيمياء الحيوية (11-20)
+        q11: "سكر أحادي",
+        q12: "جدران الخلايا النباتية",
+        q13: "الأحماض الأمينية",
+        q14: "الزبدة",
+        q15: "يخزن المعلومات الوراثية",
+        q16: "البروتينات",
+        q17: "20",
+        q18: "ATP",
+        q19: "الترتيب المكاني ثلاثي الأبعاد",
+        q20: "مونومرات",
+        
+        // الوحدة الثالثة: الإنزيمات (21-30)
+        q21: "بروتينات",
+        q22: "خفض طاقة التنشيط",
+        q23: "الموقع النشط للإنزيم يتناسب تماماً مع الركيزة",
+        q24: "يتلف ويصبح غير فعال",
+        q25: "الأميليز",
+        q26: "بالموقع النشط للإنزيم",
+        q27: "حجم الإنزيم",
+        q28: "تم تثبيته على دعامة صلبة",
+        q29: "البقع العضوية",
+        q30: "جميع المواقع النشطة مشبعة بالركيزة",
+        
+        // الوحدة الرابعة: دورة الخلية (31-40)
+        q31: "46",
+        q32: "الطور S",
+        q33: "الطور الاستوائي",
+        q34: "الصفيحة الخلوية",
+        q35: "الخلايا المتخصصة",
+        q36: "السرطان",
+        q37: "الخلايا الجذعية",
+        q38: "نهايات الكروموسومات",
+        q39: "التكاثر الجنسي",
+        q40: "خلايا الدم فقط"
+    };
+    
+    // الكلمات المفتاحية للأسئلة المقالية (41-50)
+    const keywords = {
+        q41a: ["طاقة", "تنفس", "خلوي", "ميتوكوندريا", "ATP"],
+        q41b: ["بناء", "ضوئي", "بلاستيدات", "خضراء", "نباتية"],
+        q41c: ["تعديل", "تعبئة", "توزيع", "جولجي", "مواد"],
+        q42: ["جدار", "خلوي", "بلاستيدات", "خضراء", "فجوة", "مركزية", "نباتية", "حيوانية"],
+        q43: ["تلاؤم", "مستحث", "مرن", "شكل", "موقع", "نشط", "ركيزة", "إنزيم"],
+        q44: ["تخزين", "طاقة", "أغشية", "خلايا", "عزل", "حراري", "حماية", "أعضاء"],
+        q45: ["تمهيدي", "استوائي", "انفصالي", "نهائي", "كروموسومات", "كروماتيدات", "شقيقة"],
+        q46: ["جذعية", "متخصصة", "انقسام", "إصلاح", "أنسجة", "علاج", "لوكيميا"],
+        q47: ["تيلوميرات", "نهايات", "كروموسومات", "حماية", "تقصر", "انقسام", "شيخوخة"],
+        q48: ["تدخين", "سرطان", "رئة", "أشعة", "فوق", "بنفسجية", "جلد", "فيروسات", "ورم", "حليمي"],
+        q49: ["حميدة", "خبيثة", "بطء", "سرعة", "حدود", "واضحة", "غير", "واضحة", "تنتشر", "نقيلة"],
+        q50: ["ماء", "مذيب", "سعة", "حرارية", "عالية", "حرارة", "تبخر", "قطبية", "روابط", "هيدروجينية"]
+    };
+    
+    // تحمير الإجابات المحفوظة
+    function loadSavedAnswers() {
+        // تحمير إجابات الأسئلة الموضوعية
+        for (let i = 1; i <= 40; i++) {
+            const savedAnswer = localStorage.getItem(`q${i}`);
+            if (savedAnswer) {
+                // البحث عن السؤال وتحديد الخيار
+                const allOptions = document.querySelectorAll('.option');
+                allOptions.forEach(option => {
+                    const optionText = option.querySelector('.option-text').textContent.trim();
+                    if (optionText === savedAnswer) {
+                        option.classList.add('selected');
+                    }
+                });
+            }
+        }
+        
+        // تحمير الإجابات المقالية
+        for (let i = 41; i <= 50; i++) {
+            const savedAnswer = localStorage.getItem(`q${i}`);
+            if (savedAnswer) {
+                const inputElement = document.getElementById(`q${i}`);
+                if (inputElement) {
+                    inputElement.value = savedAnswer;
+                }
+            }
+        }
+        
+        // تحمير إجابات الجدول
+        for (let i = 1; i <= 3; i++) {
+            const savedAnswer = localStorage.getItem(`q41${String.fromCharCode(96 + i)}`);
+            if (savedAnswer) {
+                const inputElement = document.getElementById(`q41${String.fromCharCode(96 + i)}`);
+                if (inputElement) {
+                    inputElement.value = savedAnswer;
+                }
+            }
+        }
+    }
+     
+    // تصحيح الإجابات وعرض النتائج
+    function showResults() {
+        let correctCount = 0;
+        let totalQuestions = 0;
+        
+        // إزالة أي تصحيح سابق
+        document.querySelectorAll('.option').forEach(option => {
+            option.classList.remove('correct', 'incorrect');
+        });
+        
+        document.querySelectorAll('.answer-input, .essay-answer').forEach(input => {
+            input.classList.remove('correct', 'incorrect');
+        });
+        
+        // تصحيح الأسئلة الموضوعية (1-40)
+        for (let i = 1; i <= 40; i++) {
+            totalQuestions++;
+            const questionId = `q${i}`;
+            const savedAnswer = localStorage.getItem(questionId);
+            const correctAnswer = correctAnswers[questionId];
+            
+            if (savedAnswer && savedAnswer === correctAnswer) {
+                correctCount++;
+                // تلوين الإجابة الصحيحة
+                const allOptions = document.querySelectorAll('.option');
+                allOptions.forEach(option => {
+                    const optionText = option.querySelector('.option-text').textContent.trim();
+                    if (optionText === savedAnswer) {
+                        option.classList.add('correct');
+                    }
+                });
+            } else if (savedAnswer) {
+                // تلوين الإجابة الخاطئة والإجابة الصحيحة
+                const allOptions = document.querySelectorAll('.option');
+                allOptions.forEach(option => {
+                    const optionText = option.querySelector('.option-text').textContent.trim();
+                    if (optionText === savedAnswer) {
+                        option.classList.add('incorrect');
+                    }
+                    if (optionText === correctAnswer) {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+        }
+        
+        // تصحيح الأسئلة المقالية (41-50)
+        for (let i = 41; i <= 50; i++) {
+            const questionId = `q${i}`;
+            const inputElement = document.getElementById(questionId);
+            
+            if (inputElement) {
+                totalQuestions++;
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                
+                if (keywords[questionId]) {
+                    let keywordFound = false;
+                    const userWords = userAnswer.split(/[\s,،.]+/);
+                    
+                    for (const keyword of keywords[questionId]) {
+                        if (userAnswer.includes(keyword.toLowerCase()) || 
+                            userWords.some(word => word === keyword.toLowerCase())) {
+                            keywordFound = true;
+                            break;
+                        }
+                    }
+                    
+                    if (keywordFound) {
+                        correctCount++;
+                        inputElement.classList.add('correct');
+                    } else if (userAnswer !== "") {
+                        inputElement.classList.add('incorrect');
+                    }
+                } else if (userAnswer !== "") {
+                    // إذا لم توجد كلمات مفتاحية، نحتاج إلى تقييم يدوي
+                    // سنعتبرها صحيحة إذا كانت تحتوي على إجابة معقولة
+                    if (userAnswer.length > 10) {
+                        correctCount++;
+                        inputElement.classList.add('correct');
+                    } else {
+                        inputElement.classList.add('incorrect');
+                    }
+                }
+            }
+        }
+        
+        // تصحيح إجابات الجدول (q41a, q41b, q41c)
+        for (let i = 1; i <= 3; i++) {
+            const questionId = `q41${String.fromCharCode(96 + i)}`;
+            const inputElement = document.getElementById(questionId);
+            
+            if (inputElement) {
+                totalQuestions++;
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const keywordGroup = keywords['q41a']; // نفس الكلمات المفتاحية لجميع أجزاء السؤال 41
+                
+                if (keywordGroup) {
+                    let keywordFound = false;
+                    const userWords = userAnswer.split(/[\s,،.]+/);
+                    
+                    for (const keyword of keywordGroup) {
+                        if (userAnswer.includes(keyword.toLowerCase()) || 
+                            userWords.some(word => word === keyword.toLowerCase())) {
+                            keywordFound = true;
+                            break;
+                        }
+                    }
+                    
+                    if (keywordFound && userAnswer.length > 5) {
+                        correctCount++;
+                        inputElement.classList.add('correct');
+                    } else if (userAnswer !== "") {
+                        inputElement.classList.add('incorrect');
+                    }
+                }
+            }
+        }
+        
+        // حساب النتيجة
+        const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
+        const totalPoints = Math.round((correctCount / totalQuestions) * 100);
+        
+        // عرض النتائج
+        document.getElementById('totalScore').textContent = `${scorePercentage}%`;
+        document.getElementById('correctCount').textContent = correctCount;
+        document.getElementById('incorrectCount').textContent = totalQuestions - correctCount;
+        document.getElementById('totalPoints').textContent = totalPoints;
+        
+        // إضافة ملاحظات الأداء
+        const performanceNotes = document.getElementById('performanceNotes');
+        let notes = "";
+        
+        if (scorePercentage >= 90) {
+            notes = "<p>ممتاز! أداء رائع، لديك فهم ممتاز لمادة الأحياء.</p>";
+        } else if (scorePercentage >= 80) {
+            notes = "<p>جيد جداً! أداء قوي، لكن يمكنك التركيز أكثر على بعض النقاط.</p>";
+        } else if (scorePercentage >= 70) {
+            notes = "<p>جيد! تحتاج إلى مراجعة بعض الدروس لتحسين أدائك.</p>";
+        } else if (scorePercentage >= 60) {
+            notes = "<p>مقبول! يجب أن تراجع المادة بشكل أعمق.</p>";
+        } else {
+            notes = "<p>ضعيف! تحتاج إلى دراسة شاملة للمادة.</p>";
+        }
+        
+        notes += `<p>لقد أجبت بشكل صحيح على ${correctCount} من أصل ${totalQuestions} سؤالاً.</p>`;
+        notes += `<p>ننصحك بمراجعة الأسئلة التي ظهرت باللون الأحمر (الإجابات الخاطئة).</p>`;
+        notes += `<p>يمكنك عرض نموذج الإجابة للأسئلة المقالية بالضغط على الأزرار المخصصة لذلك.</p>`;
+        
+        performanceNotes.innerHTML = notes;
+        
+        // إظهار قسم النتائج
+        document.getElementById('results').style.display = 'block';
+        scrollToSection('results');
+    }
+    
+    // إعادة تعيين الاختبار
+    function resetExam() {
+        if (confirm("هل تريد إعادة الاختبار من البداية؟ سيتم مسح جميع إجاباتك.")) {
+            // مسح جميع التحديدات
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // مسح جميع الإدخالات
+            document.querySelectorAll('.answer-input').forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            
+            // مسح جميع إجابات المقالية
+            document.querySelectorAll('.essay-answer').forEach(textarea => {
+                textarea.value = '';
+                textarea.classList.remove('correct', 'incorrect');
+            });
+            
+            // إخفاء جميع نماذج الإجابة
+            document.querySelectorAll('.model-answer').forEach(answer => {
+                answer.style.display = 'none';
+            });
+            
+            // إخفاء النتائج
+            document.getElementById('results').style.display = 'none';
+            
+            // مسح التخزين المحلي
+            localStorage.clear();
+            
+            // العودة للبداية
+            scrollToSection('instructions');
+        }
+    }
+    
+    // تبديل عرض نموذج الإجابة
+    function toggleModelAnswer(answerId) {
+        const answerElement = document.getElementById(answerId);
+        if (answerElement) {
+            if (answerElement.style.display === 'none' || answerElement.style.display === '') {
+                answerElement.style.display = 'block';
+            } else {
+                answerElement.style.display = 'none';
+            }
+        }
+    }
+    
+    // تهيئة الصفحة عند التحميل
+    window.addEventListener('load', function() {
+        // إنشاء النجوم في الخلفية
+        createStars();
+        
+        // تحمير الإجابات المحفوظة
+        loadSavedAnswers();
+        
+        // حفظ الإجابات تلقائياً عند التغيير
+        document.querySelectorAll('.answer-input, .essay-answer').forEach(input => {
+            input.addEventListener('input', function() {
+                localStorage.setItem(this.id, this.value);
+            });
+        });
+        
+        // إضافة مستمعي الأحداث للأزرار التي تعرض نماذج الإجابة
+        document.querySelectorAll('.toggle-answer-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const onclickAttr = this.getAttribute('onclick');
+                if (onclickAttr) {
+                    const match = onclickAttr.match(/toggleModelAnswer\('([^']+)'\)/);
+                    if (match && match[1]) {
+                        toggleModelAnswer(match[1]);
+                    }
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
